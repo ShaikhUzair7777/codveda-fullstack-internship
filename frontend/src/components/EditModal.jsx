@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getProduct, updateProduct } from "../services/api";
-import { motion, AnimatePresence } from "framer-motion";
 import Modal from "./Modal";
 
 function EditModal({ isOpen, onClose, productId, onSuccess, onError }) {
@@ -16,6 +15,7 @@ function EditModal({ isOpen, onClose, productId, onSuccess, onError }) {
     if (isOpen && productId) {
       loadProduct();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, productId]);
 
   const loadProduct = async () => {
