@@ -11,6 +11,7 @@ import ToastContainer from "./components/ToastContainer";
 function App() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [toasts, setToasts] = useState([]);
+  const [refreshProducts, setRefreshProducts] = useState(0);
 
   const addToast = (message, type = "success") => {
     const id = Date.now();
@@ -19,6 +20,12 @@ function App() {
 
   const removeToast = (id) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
+  const handleProductAdded = (message) => {
+    addToast(message, "success");
+    setShowAddModal(false);
+    setRefreshProducts((prev) => prev + 1); // Trigger refresh
   };
 
   return (
@@ -57,10 +64,7 @@ function App() {
       >
         <AddProduct
           onClose={() => setShowAddModal(false)}
-          onSuccess={(msg) => {
-            addToast(msg, "success");
-            setShowAddModal(false);
-          }}
+          onSuccess={handleProductAdded}
           onError={(msg) => addToast(msg, "error")}
           isModal={true}
         />
@@ -78,6 +82,7 @@ function App() {
             path="/"
             element={
               <ProductList
+                key={refreshProducts}
                 onAddSuccess={(msg) => addToast(msg, "success")}
                 onError={(msg) => addToast(msg, "error")}
               />
