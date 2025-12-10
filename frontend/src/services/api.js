@@ -9,10 +9,10 @@ const API = axios.create({
 export const getProducts = () => API.get("/");
 
 // Add product
-export const addProduct = (data) => API.post("/", data);
+export const createProduct = (data) => API.post("/", data);
 
 // Get a single product
-export const getProductById = (id) => API.get(`/${id}`);
+export const getProduct = (id) => API.get(`/${id}`);
 
 // Update product
 export const updateProduct = (id, data) => API.put(`/${id}`, data);
