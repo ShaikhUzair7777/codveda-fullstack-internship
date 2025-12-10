@@ -1,11 +1,21 @@
 import axios from "axios";
 
+// ⭐ Correct Render backend URL including /api/products
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://codveda-backend.onrender.com/api/products",
 });
 
-export const getProducts = () => API.get("/products");
-export const getProduct = (id) => API.get(`/products/${id}`);
-export const createProduct = (data) => API.post("/products", data);
-export const updateProduct = (id, data) => API.put(`/products/${id}`, data);
-export const deleteProduct = (id) => API.delete(`/products/${id}`);
+// Get all products
+export const getProducts = () => API.get("/");
+
+// Add product
+export const addProduct = (data) => API.post("/", data);
+
+// Get a single product
+export const getProductById = (id) => API.get(`/${id}`);
+
+// Update product
+export const updateProduct = (id, data) => API.put(`/${id}`, data);
+
+// Delete product
+export const deleteProduct = (id) => API.delete(`/${id}`);
